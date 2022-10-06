@@ -1,20 +1,31 @@
 function mergeSort(arr){
-
-  let mid = Math.round(arr.length/2);
-  rightSet = arr.slice(0, mid)
-  leftSet = arr.slice(mid+1)
-
   if(arr.length <= 1){
     return arr
   }
-  if(arr.length == 2){
-    if(arr[0] > arr[1]){
-      tempArr = []
-      tempArr.push(arr[1])
-      tempArr.push(arr[0])
-      return tempArr
-    }
-  }
 
-  
+  let mid = Math.round(arr.length/2);
+  let rightSet = mergeSort(arr.slice(0, mid));
+  let leftSet = mergeSort(arr.slice(mid));
+
+  return merge(rightSet, leftSet);
+
+  function merge(rs, ls){
+    let result = []
+    while(rs.length > 0 && ls.length > 0){
+      if( rs[0] < ls[0]){
+        result.push(rs[0]); 
+        rs.shift();
+      } else {
+        result.push(ls[0]); 
+        ls.shift();
+      }
+    }
+    return result.concat(ls, rs)
+  }
 }
+
+ let a = [15, 8, 2, -10, -7,9, 25, 0, 10, -3, -1, 4, 12, -5], b = [];
+
+ 
+ console.log(mergeSort(a)); // [-10, -7, -5, -3, -1, 0, 2, 4, 8, 9, 10, 12, 15, 25]
+ console.log(mergeSort(b)); // []
