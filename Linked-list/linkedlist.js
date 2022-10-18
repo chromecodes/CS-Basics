@@ -10,8 +10,8 @@ class linkedList{
         this.size = 0;
     }
 
-    insertFirst(){
-        
+    insertFirst( data ){
+        this.head = new node ( data, this.head)
     }
 
 }
